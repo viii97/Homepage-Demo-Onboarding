@@ -8,28 +8,23 @@ export default function AIDemoLandingPage() {
   const [submitted, setSubmitted] = useState(false);
 
   const [form, setForm] = useState({
-    // Step 1
     projectType: "",
     websiteUrl: "",
     websiteProblem: "",
-    // Step 2
     companyName: "",
     location: "",
     phone: "",
     industry: "",
     services: "",
     coreMessage: "",
-    targetCustomers: "",
-    usp: "",
-    goal: "",
-    contactMethod: "",
+    contactAction: "",
     trustElements: [],
-    highlights: "",
+    googleRating: "",
+    yearsExperience: "",
     brandColor: "",
     hasImages: "",
     style: [],
     additionalNotes: "",
-    // Step 3
     firstName: "",
     lastName: "",
     email: "",
@@ -99,10 +94,10 @@ export default function AIDemoLandingPage() {
   ];
 
   const styleOptions = [
-    { label: "Modern", opposite: "Traditionell" },
-    { label: "Premium", opposite: "Bodenständig" },
-    { label: "Persönlich", opposite: "Professionell" },
-    { label: "Direkt", opposite: "Emotional" },
+    "Modern", "Traditionell",
+    "Premium", "Bodenständig",
+    "Persönlich", "Professionell",
+    "Direkt", "Emotional",
   ];
 
   const websiteProblems = [
@@ -124,8 +119,6 @@ export default function AIDemoLandingPage() {
 
   const inputClass = "w-full rounded-2xl border border-[#e6e1d8] px-4 py-3 outline-none focus:border-[#1f4e3d] bg-white text-[#171717]";
   const labelClass = "block text-sm font-bold mb-2";
-
-  // Progress indicator
   const steps = ["Situation", "Details", "Kontakt"];
 
   if (submitted) {
@@ -137,7 +130,7 @@ export default function AIDemoLandingPage() {
             Ihre Anfrage ist angekommen.
           </h1>
           <p className="text-[#666666] text-lg mb-8">
-            Vielen Dank. Wir erstellen nun Ihre persönliche Website-Demo und senden Ihnen die kostenlose Probeversion direkt per E-Mail zu.
+            Vielen Dank. Wir erstellen Ihre persönliche Website-Demo und senden sie direkt per E-Mail zu.
           </p>
           <button
             onClick={() => { setSubmitted(false); setStep(1); setPath(""); }}
@@ -153,7 +146,6 @@ export default function AIDemoLandingPage() {
   return (
     <main className="min-h-screen bg-[#f7f5f0] text-[#171717]">
 
-      {/* Header */}
       <header className="py-6">
         <div className="mx-auto w-[min(1120px,calc(100%-32px))] flex justify-between items-center gap-6">
           <a href="#" className="text-2xl font-extrabold tracking-[-0.05em]">DemoSite.ch</a>
@@ -168,7 +160,6 @@ export default function AIDemoLandingPage() {
         </div>
       </header>
 
-      {/* Hero + Form */}
       <section className="pt-12 pb-24 md:pt-20 md:pb-28">
         <div className="mx-auto w-[min(1120px,calc(100%-32px))] grid md:grid-cols-[1.02fr_0.98fr] gap-12 items-center">
           <div>
@@ -185,10 +176,9 @@ export default function AIDemoLandingPage() {
             </div>
           </div>
 
-          {/* Form Card */}
           <div id="demo" className="bg-white border border-[#e6e1d8] rounded-[28px] shadow-xl p-6 md:p-8">
 
-            {/* Progress */}
+            {/* Progress indicator */}
             <div className="flex items-center gap-2 mb-6">
               {steps.map((s, i) => (
                 <div key={s} className="flex items-center gap-2 flex-1">
@@ -200,7 +190,9 @@ export default function AIDemoLandingPage() {
                     {step > i + 1 ? "✓" : i + 1}
                   </div>
                   <span className={`text-xs font-bold hidden sm:block ${step === i + 1 ? "text-[#171717]" : "text-[#999]"}`}>{s}</span>
-                  {i < steps.length - 1 && <div className={`flex-1 h-[2px] rounded-full ${step > i + 1 ? "bg-[#1f4e3d]" : "bg-[#e6e1d8]"}`} />}
+                  {i < steps.length - 1 && (
+                    <div className={`flex-1 h-[2px] rounded-full ${step > i + 1 ? "bg-[#1f4e3d]" : "bg-[#e6e1d8]"}`} />
+                  )}
                 </div>
               ))}
             </div>
@@ -213,13 +205,13 @@ export default function AIDemoLandingPage() {
                 {step === 3 && "Wohin senden wir die Demo?"}
               </h2>
               <p className="text-[#666666] text-sm">
-                {step === 1 && "Wählen Sie, ob Sie eine bestehende Website verbessern oder eine neue erstellen möchten."}
+                {step === 1 && "Bestehende Website verbessern oder neu starten?"}
                 {step === 2 && "Je mehr Sie angeben, desto persönlicher wird Ihre Demo. Alles optional."}
                 {step === 3 && "Wir senden die Demo direkt per E-Mail zu."}
               </p>
             </div>
 
-            {/* ── STEP 1 ── */}
+            {/* STEP 1 */}
             {step === 1 && (
               <form onSubmit={handleStepOne} className="space-y-5">
                 <div className="grid gap-3">
@@ -243,8 +235,6 @@ export default function AIDemoLandingPage() {
                         value={form.websiteUrl} onChange={(e) => updateField("websiteUrl", e.target.value)}
                         className={inputClass} />
                     </div>
-
-                    {/* NEW: Website problem */}
                     <div>
                       <label className={labelClass}>Was stört Sie aktuell am meisten?</label>
                       <div className="grid grid-cols-2 gap-2">
@@ -267,14 +257,10 @@ export default function AIDemoLandingPage() {
               </form>
             )}
 
-            {/* ── STEP 2 ── */}
+            {/* STEP 2 */}
             {step === 2 && (
-              <form onSubmit={handleStepTwo} className="space-y-4">
-                <div className="rounded-2xl bg-[#f7f5f0] border border-[#e6e1d8] p-4 text-sm text-[#666666]">
-                  Je mehr Informationen Sie angeben, desto besser passt die Demo zu Ihrem Unternehmen.
-                </div>
+              <form onSubmit={handleStepTwo} className="space-y-5">
 
-                {/* Basics */}
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label className={labelClass}>Firmenname</label>
@@ -288,9 +274,10 @@ export default function AIDemoLandingPage() {
                   </div>
                 </div>
 
-                {/* NEW: Phone in step 2 */}
                 <div>
-                  <label className={labelClass}>Telefonnummer <span className="text-[#1f4e3d]">— wichtig für CTA-Button</span></label>
+                  <label className={labelClass}>
+                    Telefonnummer <span className="text-[#1f4e3d] font-normal">— für den Anruf-Button in der Demo</span>
+                  </label>
                   <input type="tel" placeholder="+41 44 123 45 67" value={form.phone}
                     onChange={(e) => updateField("phone", e.target.value)} className={inputClass} />
                 </div>
@@ -312,43 +299,39 @@ export default function AIDemoLandingPage() {
                   </select>
                 </div>
 
+                {/* SIMPLIFIED: one field for services */}
                 <div>
-                  <label className={labelClass}>Wichtigste Dienstleistungen</label>
-                  <textarea rows="2" placeholder="z.B. Renovationen, Reparaturen, Unterhalt..."
+                  <label className={labelClass}>Ihre wichtigsten Leistungen</label>
+                  <input placeholder="z.B. Haarschnitte, Bartrasur, Pflegeprodukte"
                     value={form.services} onChange={(e) => updateField("services", e.target.value)} className={inputClass} />
                 </div>
 
-                {/* NEW: Core message */}
+                {/* SIMPLIFIED: single field replaces USP + coreMessage */}
                 <div>
                   <label className={labelClass}>
-                    Was sollen Kunden sofort über Sie verstehen?
-                    <span className="ml-1 text-[#1f4e3d]">★ Wichtigste Frage</span>
+                    Was macht Sie besonders? <span className="text-[#1f4e3d]">★ Wichtigste Frage</span>
                   </label>
                   <textarea rows="2"
-                    placeholder='z.B. "Wir sind die einzige Garage in Zürich spezialisiert auf Oldtimer."'
-                    value={form.coreMessage} onChange={(e) => updateField("coreMessage", e.target.value)} className={inputClass} />
+                    placeholder='z.B. "Kein Termin nötig — einfach vorbeikommen am Goldbrunnenplatz."'
+                    value={form.coreMessage} onChange={(e) => updateField("coreMessage", e.target.value)}
+                    className={inputClass} />
                 </div>
 
+                {/* SIMPLIFIED: action replaces goal + contactMethod */}
                 <div>
-                  <label className={labelClass}>Wer sind Ihre Wunsch-Kunden?</label>
+                  <label className={labelClass}>Was soll ein Besucher als Erstes tun?</label>
                   <div className="grid grid-cols-2 gap-2">
-                    {["Privatkunden", "KMU / Unternehmen", "Immobilienverwaltungen", "Premiumkunden", "Touristen", "Bewerber"].map((opt) => (
+                    {["Anrufen", "WhatsApp schreiben", "Offerte anfragen", "Termin buchen", "Vorbeikommen", "Bewerben"].map((opt) => (
                       <button key={opt} type="button"
-                        onClick={() => toggleArrayField("targetCustomers", opt)}
-                        className={`text-left rounded-xl border px-3 py-2 text-sm font-semibold transition ${form.targetCustomers.includes(opt) ? "border-[#1f4e3d] bg-[#f1f5f2] text-[#1f4e3d]" : "border-[#e6e1d8] bg-white hover:bg-[#f7f5f0]"}`}>
+                        onClick={() => updateField("contactAction", opt)}
+                        className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${form.contactAction === opt ? "border-[#1f4e3d] bg-[#f1f5f2] text-[#1f4e3d]" : "border-[#e6e1d8] bg-white hover:bg-[#f7f5f0]"}`}>
                         {opt}
                       </button>
                     ))}
                   </div>
                 </div>
 
-                <div>
-                  <label className={labelClass}>Was unterscheidet Ihr Unternehmen?</label>
-                  <textarea rows="2" placeholder="z.B. persönliche Beratung, schnelle Termine, Spezialisierung..."
-                    value={form.usp} onChange={(e) => updateField("usp", e.target.value)} className={inputClass} />
-                </div>
-
-                {/* NEW: Trust elements */}
+                {/* STRUCTURED trust elements */}
                 <div>
                   <label className={labelClass}>Welche Vertrauenselemente dürfen wir zeigen?</label>
                   <div className="grid grid-cols-2 gap-2">
@@ -360,74 +343,56 @@ export default function AIDemoLandingPage() {
                       </button>
                     ))}
                   </div>
+
+                  {/* Google rating only — no review count */}
                   {form.trustElements.includes("Google-Bewertungen") && (
-                    <div className="mt-3 grid grid-cols-2 gap-3">
-                      <input placeholder="Durchschnittsnote (z.B. 4.8)"
-                        className={inputClass + " text-sm"} />
-                      <input placeholder="Anzahl Bewertungen (z.B. 47)"
+                    <div className="mt-3">
+                      <label className="block text-xs font-bold mb-1 text-[#555]">Ihre Durchschnittsnote</label>
+                      <input placeholder="z.B. 4.9" value={form.googleRating}
+                        onChange={(e) => updateField("googleRating", e.target.value)}
                         className={inputClass + " text-sm"} />
                     </div>
                   )}
+
+                  {/* Years experience */}
                   {form.trustElements.includes("Jahre Erfahrung") && (
-                    <input placeholder="Seit wie vielen Jahren?" className={inputClass + " mt-3 text-sm"} />
+                    <div className="mt-3">
+                      <label className="block text-xs font-bold mb-1 text-[#555]">Seit wie vielen Jahren tätig?</label>
+                      <input placeholder="z.B. 8" value={form.yearsExperience}
+                        onChange={(e) => updateField("yearsExperience", e.target.value)}
+                        className={inputClass + " text-sm"} />
+                    </div>
                   )}
                 </div>
 
+                {/* Style */}
                 <div>
-                  <label className={labelClass}>Hauptziel der Website</label>
-                  <select value={form.goal} onChange={(e) => updateField("goal", e.target.value)} className={inputClass}>
-                    <option value="">Bitte wählen</option>
-                    <option>Mehr Anrufe</option>
-                    <option>Mehr Offertenanfragen</option>
-                    <option>Mehr Buchungen</option>
-                    <option>Mehr Vertrauen</option>
-                    <option>Moderneres Erscheinungsbild</option>
-                    <option>Mehr Bewerbungen</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className={labelClass}>Was soll der Besucher als Erstes tun?</label>
+                  <label className={labelClass}>
+                    Wie soll Ihre Website wirken? <span className="font-normal text-[#666]">(mehrere möglich)</span>
+                  </label>
                   <div className="grid grid-cols-2 gap-2">
-                    {["Anrufen", "WhatsApp schreiben", "Offerte anfragen", "Termin buchen", "Vorbeikommen", "Bewerben"].map((opt) => (
+                    {styleOptions.map((opt) => (
                       <button key={opt} type="button"
-                        onClick={() => updateField("contactMethod", opt)}
-                        className={`text-left rounded-xl border px-3 py-2 text-sm font-semibold transition ${form.contactMethod === opt ? "border-[#1f4e3d] bg-[#f1f5f2] text-[#1f4e3d]" : "border-[#e6e1d8] bg-white hover:bg-[#f7f5f0]"}`}>
+                        onClick={() => toggleArrayField("style", opt)}
+                        className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${form.style.includes(opt) ? "border-[#1f4e3d] bg-[#f1f5f2] text-[#1f4e3d]" : "border-[#e6e1d8] bg-white hover:bg-[#f7f5f0]"}`}>
                         {opt}
                       </button>
                     ))}
                   </div>
                 </div>
 
-                {/* NEW: Style as pairs */}
+                {/* Brand color */}
                 <div>
-                  <label className={labelClass}>Wie soll Ihre Website wirken? <span className="font-normal text-[#666]">(mehrere möglich)</span></label>
-                  <div className="grid grid-cols-2 gap-2">
-                    {styleOptions.flatMap(({ label, opposite }) => [
-                      <button key={label} type="button"
-                        onClick={() => toggleArrayField("style", label)}
-                        className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${form.style.includes(label) ? "border-[#1f4e3d] bg-[#f1f5f2] text-[#1f4e3d]" : "border-[#e6e1d8] bg-white hover:bg-[#f7f5f0]"}`}>
-                        {label}
-                      </button>,
-                      <button key={opposite} type="button"
-                        onClick={() => toggleArrayField("style", opposite)}
-                        className={`rounded-xl border px-3 py-2 text-sm font-semibold transition ${form.style.includes(opposite) ? "border-[#1f4e3d] bg-[#f1f5f2] text-[#1f4e3d]" : "border-[#e6e1d8] bg-white hover:bg-[#f7f5f0]"}`}>
-                        {opposite}
-                      </button>
-                    ])}
-                  </div>
-                </div>
-
-                {/* NEW: Brand color */}
-                <div>
-                  <label className={labelClass}>Haben Sie eine Firmenfarbe?</label>
-                  <input placeholder='z.B. "Dunkelgrün", "Blau #003399", oder leer lassen'
+                  <label className={labelClass}>
+                    Firmenfarbe <span className="font-normal text-[#666]">(optional)</span>
+                  </label>
+                  <input placeholder='z.B. "Dunkelgrün", "Blau", "#003399"'
                     value={form.brandColor} onChange={(e) => updateField("brandColor", e.target.value)} className={inputClass} />
                 </div>
 
-                {/* NEW: Images yes/no */}
+                {/* Images */}
                 <div>
-                  <label className={labelClass}>Haben Sie eigene Fotos / Bilder?</label>
+                  <label className={labelClass}>Haben Sie eigene Fotos?</label>
                   <div className="grid grid-cols-2 gap-3">
                     {["Ja, eigene Bilder vorhanden", "Nein, bitte Beispielbilder verwenden"].map((opt) => (
                       <button key={opt} type="button"
@@ -439,14 +404,16 @@ export default function AIDemoLandingPage() {
                   </div>
                   {form.hasImages === "Ja, eigene Bilder vorhanden" && (
                     <p className="mt-2 text-sm text-[#1f4e3d] font-semibold">
-                      ✓ Wir melden uns per E-Mail, um die Bilder abzuholen.
+                      ✓ Wir melden uns per E-Mail um die Bilder abzuholen.
                     </p>
                   )}
                 </div>
 
                 <div>
-                  <label className={labelClass}>Zusätzliche Hinweise</label>
-                  <textarea rows="2" placeholder="Optional: Gibt es etwas, das wir beachten sollen?"
+                  <label className={labelClass}>
+                    Zusätzliche Hinweise <span className="font-normal text-[#666]">(optional)</span>
+                  </label>
+                  <textarea rows="2" placeholder="Gibt es etwas, das wir besonders beachten sollen?"
                     value={form.additionalNotes} onChange={(e) => updateField("additionalNotes", e.target.value)} className={inputClass} />
                 </div>
 
@@ -462,13 +429,12 @@ export default function AIDemoLandingPage() {
               </form>
             )}
 
-            {/* ── STEP 3 ── */}
+            {/* STEP 3 */}
             {step === 3 && (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="rounded-2xl bg-[#f7f5f0] border border-[#e6e1d8] p-4 text-sm text-[#666666]">
                   Fast geschafft. Wir senden Ihnen die Demo direkt per E-Mail zu.
                 </div>
-
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <label className={labelClass}>Vorname</label>
@@ -481,13 +447,11 @@ export default function AIDemoLandingPage() {
                       onChange={(e) => updateField("lastName", e.target.value)} className={inputClass} />
                   </div>
                 </div>
-
                 <div>
                   <label className={labelClass}>E-Mail</label>
                   <input type="email" required placeholder="name@firma.ch" value={form.email}
                     onChange={(e) => updateField("email", e.target.value)} className={inputClass} />
                 </div>
-
                 <div className="grid grid-cols-2 gap-3 pt-2">
                   <button type="button" onClick={() => setStep(2)}
                     className="rounded-full border border-[#e6e1d8] px-6 py-4 font-bold hover:bg-[#ebe7de] transition">
@@ -504,18 +468,15 @@ export default function AIDemoLandingPage() {
         </div>
       </section>
 
-      {/* Demo preview section */}
+      {/* Demo previews */}
       <section className="py-20 bg-white border-y border-[#e6e1d8] overflow-hidden">
         <div className="mx-auto w-[min(1120px,calc(100%-32px))]">
           <div className="max-w-3xl mb-10">
             <h2 className="text-4xl md:text-6xl font-extrabold tracking-[-0.06em] leading-none mb-4">
               Websites, die auf den ersten Blick überzeugen.
             </h2>
-            <p className="text-lg text-[#666666]">
-              Jede Demo wird individuell auf Branche, Ziel und bestehende Inhalte abgestimmt.
-            </p>
+            <p className="text-lg text-[#666666]">Jede Demo wird individuell auf Branche, Ziel und Inhalte abgestimmt.</p>
           </div>
-
           <div className="grid md:grid-cols-3 gap-5 mb-12">
             {demoItems.map((item) => (
               <div key={item.title} className="group rounded-[28px] bg-[#f7f5f0] border border-[#e6e1d8] overflow-hidden shadow-sm hover:shadow-xl transition">
@@ -541,7 +502,6 @@ export default function AIDemoLandingPage() {
             ))}
           </div>
         </div>
-
         <div className="relative w-full overflow-hidden border-y border-[#e6e1d8] bg-[#f7f5f0] py-5">
           <div className="flex w-max gap-4 animate-[scrollDemo_38s_linear_infinite]">
             {[...demoItems, ...demoItems].map((item, index) => (
@@ -555,7 +515,6 @@ export default function AIDemoLandingPage() {
             ))}
           </div>
         </div>
-
         <style>{`
           @keyframes scrollDemo {
             from { transform: translateX(0); }
@@ -569,13 +528,13 @@ export default function AIDemoLandingPage() {
         <div className="mx-auto w-[min(1120px,calc(100%-32px))]">
           <div className="max-w-2xl mb-10">
             <h2 className="text-4xl md:text-6xl font-extrabold tracking-[-0.06em] leading-none mb-4">So funktioniert es</h2>
-            <p className="text-lg text-[#666666]">Ein einfacher Prozess — von der Anfrage bis zur fertigen Demo.</p>
+            <p className="text-lg text-[#666666]">Von der Anfrage bis zur fertigen Demo — in wenigen Minuten.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-5">
             {[
-              ["1", "Situation wählen", "Sie geben an, ob Sie eine bestehende Website verbessern oder eine neue Website erstellen möchten."],
-              ["2", "Angaben ergänzen", "Optionale Informationen helfen uns, die Demo genauer auf Ihr Unternehmen abzustimmen."],
-              ["3", "Probeversion erhalten", "Sie erhalten den Entwurf per E-Mail und können unverbindlich entscheiden."],
+              ["1", "Situation wählen", "Bestehende Website verbessern oder neu starten — Sie entscheiden."],
+              ["2", "Angaben ergänzen", "Je mehr Details, desto persönlicher und genauer wird Ihre Demo."],
+              ["3", "Demo erhalten", "Sie bekommen den Entwurf per E-Mail und entscheiden unverbindlich."],
             ].map((item) => (
               <div key={item[0]} className="rounded-[24px] bg-[#f7f5f0] border border-[#e6e1d8] p-7">
                 <div className="h-11 w-11 rounded-full bg-[#1f4e3d] text-white flex items-center justify-center font-extrabold mb-5">{item[0]}</div>
@@ -607,7 +566,7 @@ export default function AIDemoLandingPage() {
                     <path d="M78 23H96V41" stroke="#B8FFC7" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </div>
-                <h2 className="text-[42px] md:text-[52px] leading-[0.98] tracking-[-0.07em] font-extrabold mb-8">
+                <h2 className="text-[42px] leading-[0.98] tracking-[-0.07em] font-extrabold mb-8">
                   Mehr Anfragen.<br />
                   <span className="text-[#9AF5B3]">Weniger Aufwand.</span>
                 </h2>
@@ -620,10 +579,10 @@ export default function AIDemoLandingPage() {
 
           <div className="grid gap-5">
             {[
-              ["user", "Mehr Anfragen statt nur Besucher", "Ihre Website erklärt sofort, was Sie anbieten und warum Kunden genau Sie kontaktieren sollten, statt weiterzusuchen."],
-              ["eye", "Ein klarer erster Eindruck", "Innerhalb weniger Sekunden entscheidet sich, ob jemand bleibt oder geht. Ihre Seite wirkt sofort professionell und vertrauenswürdig."],
-              ["target", "Kunden verstehen Ihr Angebot sofort", "Keine Verwirrung mehr. Besucher sehen auf einen Blick, was Sie machen, für wen es ist und wie sie Sie erreichen."],
-              ["rocket", "Sie sehen den Unterschied sofort", "Statt langen Erklärungen erhalten Sie eine konkrete Demo, die zeigt, wie Ihre Website wirken muss, um besser zu funktionieren."],
+              ["user", "Mehr Anfragen statt nur Besucher", "Ihre Website erklärt sofort, was Sie anbieten und warum Kunden genau Sie kontaktieren sollten."],
+              ["eye", "Ein klarer erster Eindruck", "Innerhalb weniger Sekunden entscheidet sich, ob jemand bleibt oder geht. Ihre Seite wirkt sofort professionell."],
+              ["target", "Kunden verstehen Ihr Angebot sofort", "Besucher sehen auf einen Blick, was Sie machen, für wen es ist und wie sie Sie erreichen."],
+              ["rocket", "Sie sehen den Unterschied sofort", "Statt langen Erklärungen erhalten Sie eine konkrete Demo — die zeigt was möglich ist."],
             ].map(([icon, title, text]) => (
               <div key={title} className="rounded-[28px] bg-white border border-[#e6e1d8] p-6 md:p-7 shadow-sm flex gap-6 items-start">
                 <div className="h-16 w-16 rounded-full bg-[#edf5ed] text-[#1f4e3d] flex items-center justify-center shrink-0">
@@ -647,9 +606,7 @@ export default function AIDemoLandingPage() {
         <div className="mx-auto w-[min(1120px,calc(100%-32px))] rounded-[34px] bg-[#111111] text-white p-8 md:p-16 grid md:grid-cols-[1fr_auto] gap-8 items-center">
           <div>
             <h2 className="text-4xl md:text-6xl font-extrabold tracking-[-0.06em] leading-none mb-5">Testen Sie es selbst.</h2>
-            <p className="text-white/70 text-lg max-w-2xl">
-              Kostenlos, unverbindlich — und in wenigen Minuten ausgefüllt.
-            </p>
+            <p className="text-white/70 text-lg max-w-2xl">Kostenlos, unverbindlich — in wenigen Minuten ausgefüllt.</p>
           </div>
           <a href="#demo" className="rounded-full bg-white text-[#111111] px-7 py-4 font-extrabold text-center hover:bg-[#ebe7de] transition">
             Demo starten
